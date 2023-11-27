@@ -23,13 +23,6 @@ jobs:
       - name: Build
         run: env HUGO_PARAMS_gitalk_clientId=${{ secrets.GITALK_CLIENTID }} HUGO_PARAMS_gitalk_clientSecret=${{ secrets.GITALK_CLIENT_SECRET }} hugo --minify 
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages  # 推送到 gh-pages 分支
-          PUBLISH_DIR: ./public
-          commit_message: ${{ github.event.head_commit.message }}
 
       - name: Deploy AliYun Cloud
         uses: wlixcc/SFTP-Deploy-Action@v1.2.1
