@@ -23,6 +23,16 @@ draft: false
 
 > 与完全出于兴趣的工作相比，被委托的工作通常表现出较少的创造性。
 
+### 关于技术
+
+也正是因为在了解和使用`loco`的过程中，发现通过这种开源项目的issue 列表里通过一些有经验的开发者的回答可以学到一些开发上经验，其中这个issue 给自己的印象比较深刻：<https://github.com/loco-rs/loco/issues/245>
+
+其实我在最开始使用的时候也碰到了这个疑问，因为确实我在之前的老代码中也是像这个提问者一样，当时也在想作者为什么这样设计了这个表结构，users表中的`pid`是什么意思，看了下面的评论之后，明白了作者的设计初衷：
+
+- **Data Integrity:** Numeric IDs (id) are typically managed by the database and offer performance advantages, especially when it comes to indexing and joining tables. They are sequential and compact, which helps in maintaining a streamlined and efficient database operation.
+- **External Flexibility:** UUIDs (pid) provide a globally unique identifier that is ideal for public-facing interfaces. They reduce the risk of enumeration attacks and are not sequential, which can be an advantage for security and distributed systems.
+- **Best of Both Worlds:** By using both, we ensure that the system remains robust and efficient internally while also providing the necessary flexibility and security considerations for external interactions
+
 ## 一些感悟
 
 一个人的性格很难改变，自己最近在思考，好像从初中开始到现在自己的性格方面没有太大的改变，那如果自己做的事情或者工作时适应自己性格的，可能自己就能够做的更好，而和自己性格特点相反的或者相违背的事情或者工作，自己可能就只能做的普普通通。
