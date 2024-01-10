@@ -1,5 +1,5 @@
 ---
-title: "Weekly_reivew_20240105"
+title: "周报20240105"
 date: 2024-01-05T10:29:47+08:00
 tags: ["weekly_review"]
 categories: ["weekly_review"]
