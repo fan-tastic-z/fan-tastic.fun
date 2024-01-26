@@ -4,7 +4,7 @@ date: 2024-01-26T10:57:48+08:00
 tags: ["Rust", "minio-rs", "minio"]
 categories: ["Rust"]
 keywords: ["minio-rs", "Rust操作minio"]
-draft: true
+draft: false
 ---
 
 在项目中经常会碰到一些小文件需要保存，而大量的小文件会导致磁盘的inode被占用，从而导致磁盘空间不足。MinIO是一个开源的对象存储服务器，用来存储和管理大量的非结构化数据。这篇文章主要整理Rust 对MinIO简单操作的代码例子。
