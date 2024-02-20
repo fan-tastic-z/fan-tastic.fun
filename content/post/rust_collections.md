@@ -259,6 +259,56 @@ map 的迭代
 - 按共享引用迭代（for (k, v) in &map）产生 (&K, &V) 对
 - 按可修改引用迭代（for (k, v) in &mut map）产生 (&K, &mut V)对
 
+### 补充
+
+之前一直没有把 <https://github.com/rust-lang/rustlings> 的练习做一遍，所以最近想的是把官方的这个小练习做一遍，在做到关于HashMap的部分的时候发现 `hashmap 3`的练习挺有意思的，在搜索解决方式的时候看到了一个自己之前没有用的方法：<https://www.reddit.com/r/rust/comments/w4vf5a/idiomatic_hashmap_access_from_rustlings_exercise/>
+
+```rust
+// A structure to store the goal details of a team.
+struct Team {
+    goals_scored: u8,
+    goals_conceded: u8,
+}
+
+fn build_scores_table(results: String) -> HashMap<String, Team> {
+    // The name of the team is the key and its associated struct is the value.
+    let mut scores: HashMap<String, Team> = HashMap::new();
+
+    for r in results.lines() {
+        let v: Vec<&str> = r.split(',').collect();
+        let team_1_name = v[0].to_string();
+        let team_1_score: u8 = v[2].parse().unwrap();
+        let team_2_name = v[1].to_string();
+        let team_2_score: u8 = v[3].parse().unwrap();
+
+        scores
+        .entry(team_1_name)
+        .and_modify(|t| {
+            t.goals_scored += team_1_score;
+            t.goals_conceded += team_2_score;
+        })
+        .or_insert(Team {
+            goals_scored: team_1_score,
+            goals_conceded: team_2_score,
+        });
+
+        scores
+        .entry(team_2_name)
+        .and_modify(|t| {
+            t.goals_scored += team_2_score;
+            t.goals_conceded += team_1_score;
+        })
+        .or_insert(Team {
+            goals_scored: team_2_score,
+            goals_conceded: team_1_score,
+        });
+    }
+    scores
+}
+```
+
+`hashmap` 中的 `entry` 方法可以可以非常方便的让我们对hashmap进行处理来实现这个联系的需求
+
 ## `HashSet<T>`和`BTreeSet<T>`
 
 `HashSet＜K＞`和`BTreeSet＜K＞`其实就是`HashMap＜K，V＞`和`BTreeMap＜K，V＞`把Value设置为空元组的特定类型，等价于`HashSet＜K，（）＞`和`BTreeSet＜K，（）＞`
@@ -299,3 +349,6 @@ fn main() {
 - <https://doc.rust-lang.org/std/collections/struct.HashMap.html>
 - <https://doc.rust-lang.org/std/collections/struct.BTreeMap.html>
 - <https://doc.rust-lang.org/std/collections/struct.HashSet.html>
+- <https://www.reddit.com/r/rust/comments/w4vf5a/idiomatic_hashmap_access_from_rustlings_exercise/>
+- <https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry>
+- <https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html#method.and_modify>
