@@ -1,5 +1,5 @@
 ---
-title: "Weekly_review_20240121"
+title: "周报20240121"
 date: 2024-01-21T18:56:58+08:00
 tags: ["weekly_review"]
 categories: ["weekly_review"]
