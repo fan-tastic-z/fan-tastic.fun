@@ -112,6 +112,14 @@ fn main() {
 ```
 
 Rust 中可以通过 `String::from("fan-tastic")`来创建 `String` 类型的字符串
+字符串是可能多行的，换行符也是字符串的一部分，但是如果字符串的一行以`\` 结尾，机会丢弃后面的换行符和前面的空格。
+Rust 提供了原始字符串，原始字符串使用小写字母r进行标记，原始字符串不识别任何转义序列：
+
+`let path = r"c:\Program Files\data"`
+
+如果你要在原始字符串中写引号，请在两边加一对 `#`
+
+`let quotes = r#"And then I said: "There is no escape!""#;`
 
 ### str 和 String 的关系
 
